@@ -11,7 +11,6 @@ import {
 
 const getIcon = weatherData => {
     const { id } = weatherData;
-    console.log(id);
     if( id <= 299){
         return THUNDER;
     }else if( id <= 399){

@@ -1,4 +1,13 @@
+.locationList {
+    margin-top: 6%;
+    height: 100vh;
+}
 
+.forecastExtended {
+    padding: 15px 0px;
+    color: #ffff;
+    text-align: center;
+}
 @media(max-width: 64em){
     .locationList {
         max-height: 30vh;

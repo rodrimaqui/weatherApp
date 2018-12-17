@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import './App.css';
 import LocationList from './components/LocationList';
+import ForecastExtended from './components/ForecastExtended';
 const cities = [
   "Miramar,ar",
   "Mar del Plata,ar",
@@ -14,11 +15,21 @@ const cities = [
   "kiev,ua"
 ];
 class App extends Component {
-  handleSelectedLocation = city =>{
-    console.log(`handleSelectedLocation(App) ${city}`);
-  }
 
+  constructor(){
+    super();
+    this.state = {
+      city: null
+    }
+  }
+  handleSelectedLocation = city =>{
+    this.setState({
+      city
+    });
+  }
+  
   render() {
+    const { city } = this.state;
     return (
       <Grid fluid>
         <Row>
@@ -31,14 +42,16 @@ class App extends Component {
             </AppBar>
         </Row>
         <Row>
-          <Col xs={ 12 } mdOffset={ 4 } md={ 6 }>
+          <Col xs={ 12 } mdOffset={ 1 } md={ 6 }>
             <LocationList 
               cities={cities}
               onSelectedLocation={this.handleSelectedLocation}
             />
           </Col>
-          <Col xs={ 12 } md={ 6 }>
-
+          <Col xs={ 12 } md={ 4 }>
+            <div className='forecast'>
+                { city ? <ForecastExtended city={ city }/> : null}
+            </div>
           </Col>
         </Row>
       </Grid>
