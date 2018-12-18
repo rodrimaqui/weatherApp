@@ -1,8 +1,9 @@
 
 
 .forecast {
-  background-color: gray;
-  height: 100%;
-  margin-top: 8%;
-  margin-bottom: 8%;
+  background-color: #999;
+  height: 85vh;
+  overflow: auto;
+  padding: 0px 20px;
+  width: cal(100% - 40px);
 }

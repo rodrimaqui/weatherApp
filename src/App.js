@@ -42,13 +42,13 @@ class App extends Component {
             </AppBar>
         </Row>
         <Row>
-          <Col xs={ 12 } mdOffset={ 1 } md={ 6 }>
+          <Col xs={ 12 }  md={ 6 }>
             <LocationList 
               cities={cities}
               onSelectedLocation={this.handleSelectedLocation}
             />
           </Col>
-          <Col xs={ 12 } md={ 4 }>
+          <Col xs={ 12 }  md={ 6 }>
             <div className='forecast'>
                 { city ? <ForecastExtended city={ city }/> : null}
             </div>

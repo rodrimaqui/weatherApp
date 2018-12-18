@@ -3,24 +3,9 @@ import { string } from 'prop-types';
 import ForecastItem from './ForecastItem';
 import getUrlWeatherExtended from './../services/getUrlWearherExtended';
 import transformForecast from './../services/transformForecast';
+import CircularProgress from "@material-ui/core/CircularProgress";
 import './styles.css';
 
-/*const days = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday'
-]
-
-const data = {
-    temperature: 15,
-    weatherState: 'sun',
-    humidity: 80,
-    wind: 150
-}*/
 class ForecastExtended extends Component{
     constructor(){
         super();
@@ -29,39 +14,51 @@ class ForecastExtended extends Component{
         }
     }
     componentDidMount() {
-        this.getForecastExtended();
+        this.getForecastExtended(this.props.city);
+    }
+    componentDidUpdate(prevProps, prevState) {
+        if(this.props.city !== prevProps.city){
+            this.setState({
+                forecastData: null
+            })
+            this.getForecastExtended(prevProps.city);
+        }
     }
     
-    getForecastExtended(){
-        console.log(getUrlWeatherExtended(this.props.city));
-        fetch(getUrlWeatherExtended(this.props.city))
+    
+    getForecastExtended(city){
+        fetch(getUrlWeatherExtended(city))
             .then(response => {
                 return response.json();
             })
             .then(response => {
-                console.log(response);
+                const forecastData = transformForecast(response);
+                console.log(forecastData);
                 this.setState({
-                    forecastData: transformForecast(response)
-                })
+                    forecastData
+                });
             })
             .catch(error => console.log(error));
     }
-    renderForecastItemsDays(){
-        return 'Render Items';
-        //return days.map( day => <ForecastItem key={ day } weekDay={ day }  hour={14} data={data}/>)
-    }
-    renderProgress(){
-        return 'Waiting the information';
+    renderForecastItemsDays(forecastData){
+
+        return forecastData.map( (element,index) => 
+                    (<ForecastItem 
+                        key={ index }
+                        weekDay={ element.weekDay }
+                        hour={element.hour}
+                        data={element.data}
+                        />));
     }
     render(){
-        const { city, hour } = this.props;
+        const { city } = this.props;
         const { forecastData } = this.state;
         return(
             <div>
                 <h2 className='forecastExtended'>
                     {city}
                 </h2>
-                {forecastData ? this.renderForecastItemsDays() : this.renderProgress()}
+                {forecastData ? this.renderForecastItemsDays(forecastData) : <CircularProgress size={50}/>}
             </div>
         );
     }
