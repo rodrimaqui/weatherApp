@@ -4,7 +4,6 @@ import {
     CLOUD,
     RAIN,
     SNOW,
-    ECLIPSE,
     THUNDER,
     DRIZZLE
 } from './../constants/weathers';

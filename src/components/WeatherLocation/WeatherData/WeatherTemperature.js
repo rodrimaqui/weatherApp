@@ -19,6 +19,8 @@ const icons = {
     [CLOUD]: 'cloud',
     [RAIN]: 'rain',
     [SNOW]: 'snow',
+    [THUNDER]: 'thunder',
+    [DRIZZLE]: 'drizzle',
     [ECLIPSE]: 'solar-eclipse',
 };
 const sizeIcon = "4x";
